@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+    "@mui/material-next": "^6.0.0-alpha.112",
     "@types/node": "20.9.3",
     "@types/react": "18.2.38",
     "@types/react-dom": "18.2.16",

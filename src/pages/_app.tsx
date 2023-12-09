@@ -1,6 +1,5 @@
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -19,7 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   return (
     <>
-      <Component {...pageProps} />
       <Box sx={{ display: 'flex' }}>
       {/* <CssBaseline /> */}
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
