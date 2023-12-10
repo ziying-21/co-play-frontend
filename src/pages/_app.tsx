@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            {['故事示例1', '故事示例2', '故事示例3', '故事示例4', '故事示例5', '故事示例6', '故事示例7', '故事示例8', '故事示例9', '故事示例10', '故事示例11', '故事示例12', '故事示例13', '故事示例14', '故事示例15' ].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton onClick={() => {
                   router.push(`/${index}`);
