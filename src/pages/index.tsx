@@ -37,25 +37,25 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Grid container columnSpacing={2}>
             <Grid item>
-            <Button size="large" variant="outlined">故事示例1</Button>
+            <Button size="large" variant="outlined">从前有座山，山上有座庙...</Button>
             </Grid>
             <Grid item>
-            <Button size="large" variant="outlined">故事示例2</Button>
+            <Button size="large" variant="outlined">很久很久以前...</Button>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Grid container columnSpacing={2}>
             <Grid item>
-            <Button size="large" variant="outlined">故事示例3</Button>
+            <Button size="large" variant="outlined">小蝌蚪找妈妈...</Button>
             </Grid>
             <Grid item>
-            <Button size="large" variant="outlined">故事示例4</Button>
+            <Button size="large" variant="outlined">汽车行驶在落基山脉...</Button>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Button size="large" variant="contained"> Create a new story </Button>
+          <Button size="large" variant="contained"> 创建一个新故事 </Button>
         </Grid>
       </Grid>
     </Box>

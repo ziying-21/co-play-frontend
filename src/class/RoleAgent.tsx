@@ -11,18 +11,25 @@ class RoleAgent {
   related_timesteps: number[];
   otherInformation: string;
 
-  constructor() {
-    this.name = "";
-    this.age = 0;
-    this.gender = "";
-    this.job = "";
-    this.characters = [];
-    this.advantage = [];
-    this.disadvantage = [];
-    this.preference = [];
-    this.values = [];
-    this.related_timesteps = [];
-    this.otherInformation = "";
+  constructor(
+    name: string = "", 
+    age: number = 0, 
+    gender: string = "male", 
+    job: string = "teacher", 
+    characters: string[] = [], 
+    advantage: string[] = [], 
+    disadvantage: string[] = [], 
+    preference: string[] = [], 
+    values: string[] = [], 
+    related_timesteps: number[] = [], 
+    otherInformation: string = "no info",
+  ) {
+    this.name = name; this.age = age; this.gender = gender; this.job = job;
+    this.characters = characters; this.advantage = advantage;
+    this.disadvantage = disadvantage;
+    this.preference = preference; this.values = values;
+    this.related_timesteps = related_timesteps;
+    this.otherInformation = otherInformation;
   }
 };
 
