@@ -14,8 +14,6 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import Typography from "@mui/material/Typography";
 import Tooltip from '@mui/material/Tooltip';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
-
 import TimestepInfo from "./TimestepInfo";
 import RoleList from "./RoleList";
 import SceneList from "./SceneList";
@@ -59,11 +57,7 @@ const Story = (props: StoryProps) => {
               <MoreVertIcon />
             </IconButton>
           }
-          title={
-            <Typography variant="h5">
-              {props.title}
-            </Typography>
-          }
+          title={props.title}
         />
         <Menu
           id="basic-menu"
@@ -95,7 +89,6 @@ const Story = (props: StoryProps) => {
             related_scene={props.timesteps[activeStep].related_scene}
             related_role={props.timesteps[activeStep].related_role}
           />
-
           <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} />
           <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} />
           <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen}/>

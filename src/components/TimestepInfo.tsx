@@ -7,6 +7,8 @@ import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, Grid } from "@mui/material";
+import RoleInfo from "./RoleInfo";
+import { useState } from "react";
 
 interface TimestepInfoProps {
   id: number;
@@ -16,6 +18,11 @@ interface TimestepInfoProps {
 }
 
 const TimestepInfo = (props: TimestepInfoProps) => {
+
+  const [roleInfoOpen, setRoleInfoOpen] = useState(false);
+  const [selectedRoleIdx, setSelectedRoleIdx] = useState(-1);
+  const [sceneInfoOpen, setSceneInfoOpen] = useState(false);
+
   return (
     <>
       <Card sx={{ maxWidth: "100%", height: "60vh"}} variant="outlined" style={{border: "none"}}>
@@ -40,12 +47,11 @@ const TimestepInfo = (props: TimestepInfoProps) => {
                   <Typography variant="h5" style={{textAlign: "center"}}>
                     关联角色:
                   </Typography>
-                  {props.related_role.map((role, index) => (
+                    {props.related_role.map((role, index) => (
                       <Typography variant="h5" key={index}  style={{textAlign: "center"}}>
-                        <Button> {role.name} </Button>
+                        <Button onClick={() => {setSelectedRoleIdx(index); setRoleInfoOpen(true)}}> {role.name} </Button>
                       </Typography>
-                    ))
-                  }
+                    ))}
                   <Button style={{width: "100%"}}> 编辑角色 </Button>
                 </CardContent>
               </Card>
@@ -86,6 +92,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
           </Grid>
         </CardContent>
       </Card>
+      <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={props.related_role[selectedRoleIdx]} />
     </>
   )
 };
