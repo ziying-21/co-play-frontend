@@ -20,6 +20,9 @@ import TimestepInfo from "./TimestepInfo";
 import RoleList from "./RoleList";
 import SceneList from "./SceneList";
 import { Card, CardContent, CardHeader, IconButton, Menu, MenuItem } from "@mui/material";
+import CreateRole from "./CreateRole";
+import CreateScene from "./CreateScene";
+import CreateTimestep from "./CreateTimestep";
 
 interface StoryProps {
   id: any;
@@ -34,6 +37,9 @@ const Story = (props: StoryProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const [roleDialogOpen, setRoleDialogOpen] = useState(false);
   const [sceneDialogOpen, setSceneDialogOpen] = useState(false);
+  const [createRoleDialogOpen, setCreateRoleDialogOpen] = useState(false);
+  const [createSceneDialogOpen, setCreateSceneDialogOpen] = useState(false);
+  const [createTimestepDialogOpen, setCreateTimestepDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -89,21 +95,32 @@ const Story = (props: StoryProps) => {
             related_scene={props.timesteps[activeStep].related_scene}
             related_role={props.timesteps[activeStep].related_role}
           />
+
           <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} />
           <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} />
+          <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen}/>
+          <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen}/>
+          <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen}/>
+
           <Box sx={{ '& > :not(style)': { m: 1 } }} >
             <Tooltip title="添加时间步">
-              <Fab aria-label="AddTimestep" style={{ position: 'fixed', right: 268, bottom: 16 }}>
+              <Fab aria-label="AddTimestep" style={{ position: 'fixed', right: 268, bottom: 16 }}
+                onClick={() => {setCreateTimestepDialogOpen(true);}}
+              >
                 <AccessTimeIcon />
               </Fab>
             </Tooltip>
             <Tooltip title="添加角色">
-              <Fab aria-label="AddRole" style={{ position: 'fixed', right: 184, bottom: 16 }}>
+              <Fab aria-label="AddRole" style={{ position: 'fixed', right: 184, bottom: 16 }}
+                onClick={() => {setCreateRoleDialogOpen(true);}}
+              >
                 <PersonAddIcon />
               </Fab>
             </Tooltip>
             <Tooltip title="添加场景">
-              <Fab aria-label="AddScene" style={{ position: 'fixed', right: 100, bottom: 16 }}>
+              <Fab aria-label="AddScene" style={{ position: 'fixed', right: 100, bottom: 16 }}
+                onClick={() => {setCreateSceneDialogOpen(true);}}
+              >
                 <HouseIcon />
               </Fab>
             </Tooltip>
