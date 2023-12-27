@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
 import MyDialog from './MyDialog';
-import Typography from '@mui/material/Typography';
+import SceneAgent from '@/class/SceneAgent';
 
 interface SceneListProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  scenes: SceneAgent[];
 }
 
 const SceneList = (props: SceneListProps) => {
@@ -12,12 +13,11 @@ const SceneList = (props: SceneListProps) => {
     props.setOpen(false);
   }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={'场景列表 - 查看场景并编辑'} onOK={onOK}>
-      <Typography gutterBottom>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-        consectetur ac, vestibulum at eros.
-      </Typography>
+    <MyDialog open={props.open} setOpen={props.setOpen} title={'场景列表 - 查看场景并编辑'} onOK={onOK} okText="确定">
+      {props.scenes.map((scene, idx) => (
+          <p>{scene.place}</p>
+        )
+      )}
     </MyDialog>
   )
 }

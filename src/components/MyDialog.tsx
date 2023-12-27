@@ -17,6 +17,7 @@ interface MyDialogProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   onOK: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  okText: string;
   children?: React.ReactNode;
   title: string;
 }
@@ -26,6 +27,7 @@ const MyDialog = (props: MyDialogProps) => {
     <BootstrapDialog
         aria-labelledby="customized-dialog-title"
         open={props.open}
+        fullWidth
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           {props.title}
@@ -42,7 +44,7 @@ const MyDialog = (props: MyDialogProps) => {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={props.onOK}>
-            确定
+            {props.okText}
           </Button>
         </DialogActions>
       </BootstrapDialog>

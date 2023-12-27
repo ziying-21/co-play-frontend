@@ -11,7 +11,6 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HouseIcon from '@mui/icons-material/House';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import Typography from "@mui/material/Typography";
 import Tooltip from '@mui/material/Tooltip';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import TimestepInfo from "./TimestepInfo";
@@ -21,6 +20,7 @@ import { Card, CardContent, CardHeader, IconButton, Menu, MenuItem } from "@mui/
 import CreateRole from "./CreateRole";
 import CreateScene from "./CreateScene";
 import CreateTimestep from "./CreateTimestep";
+import { Result } from "antd";
 
 interface StoryProps {
   id: any;
@@ -51,7 +51,6 @@ const Story = (props: StoryProps) => {
     <>
       <Card variant="outlined" style={{ border: "none" }}>
         <CardHeader
-          sx={{ height: "10%" }}
           action={
             <IconButton aria-label="settings" onClick={handleClick} id="more-list">
               <MoreVertIcon />
@@ -74,27 +73,27 @@ const Story = (props: StoryProps) => {
         <CardContent>
           {
             props.timesteps.length ?
-              <Stepper nonLinear activeStep={activeStep}>
-                {props.timesteps.map((label, index) => (
-                  <Step key={label.id}>
-                    <StepButton color="inherit" onClick={() => {
-                      setActiveStep(index);
-                    }}>
-                    </StepButton>
-                  </Step>
-                ))}
-              </Stepper> :
-              <></>
+              <>
+                <Stepper nonLinear activeStep={activeStep}>
+                  {props.timesteps.map((label, index) => (
+                    <Step key={label.id}>
+                      <StepButton color="inherit" onClick={() => {
+                        setActiveStep(index);
+                      }}>
+                      </StepButton>
+                    </Step>
+                  ))}
+                </Stepper>
+                <br />
+                <TimestepInfo
+                  id={activeStep}
+                  info={props.timesteps[activeStep]}
+                />
+              </>
+              : <Result status="404" title="当前故事时间步为空" subTitle="请先创建时间步" />
           }
-          <br />
-          <TimestepInfo
-            id={activeStep}
-            title={props.timesteps[activeStep].title}
-            related_scene={props.timesteps[activeStep].related_scene}
-            related_role={props.timesteps[activeStep].related_role}
-          />
-          <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} />
-          <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} />
+          <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} roles={props.role}/>
+          <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene}/>
           <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen} />
           <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen} />
           <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen} />

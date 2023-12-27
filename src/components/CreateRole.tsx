@@ -12,7 +12,7 @@ const CreateRole = (props: CreateRoleProps) => {
     props.setOpen(false);
   }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建角色'} onOK={onOK}>
+    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建角色'} onOK={onOK} okText="确定">
       <Typography variant="body1">
         正在创建角色，请按照下面的指引完成角色设定，然后可以用该角色进行故事创作
       </Typography>

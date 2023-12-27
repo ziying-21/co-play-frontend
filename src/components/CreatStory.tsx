@@ -12,7 +12,7 @@ const CreateStory = (props: CreateStoryProps) => {
     // TODO
   }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建一个新故事'} onOK={onOK}>
+    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建一个新故事'} onOK={onOK} okText="确定">
       <>
         <Typography variant="body1">
           正在创建您的故事，请按照下面的指引完成故事的初始设定，然后进行创作

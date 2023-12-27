@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </List>
         </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto" }}>
         <Toolbar />
         <Component {...pageProps} />
       </Box>

@@ -13,7 +13,7 @@ const CreateTimestep = (props: CreateTimeProps) => {
     props.setOpen(false);
   }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建时间步'} onOK={onOK}>
+    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建时间步'} onOK={onOK} okText="确定">
       <Typography gutterBottom>
         正在创建时间步，请按照下面的指引完成设定，然后可以进行故事创作
       </Typography>

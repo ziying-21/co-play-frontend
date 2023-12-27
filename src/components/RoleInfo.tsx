@@ -1,6 +1,7 @@
 import RoleAgent from "@/class/RoleAgent";
 import MyDialog from "./MyDialog";
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
+import RoleInfoDetail from "./RoleInfoDetail";
 
 interface RoleInfoProps {
   open: boolean;
@@ -9,14 +10,19 @@ interface RoleInfoProps {
 }
 
 const RoleInfo = (props: RoleInfoProps) => {
-  const onOK = () => {}
-  let info: RoleAgent = new RoleAgent("测试", 18, "male", "teacher");
-  if (props.info) {
-    info = props.info
-  }
+  const [interractMode, setInterractMode] = useState(false);
+  const onOK = () => { setInterractMode((x) => !x); }
+  const info: RoleAgent = props.info ? props.info : new RoleAgent();
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} onOK={onOK} title={info.name}>
-      <> 角色信息 </>
+    <MyDialog open={props.open} setOpen={props.setOpen} onOK={onOK} okText={interractMode ? "返回详情界面" : "点击此处和TA对话"} title={info.name}>
+      {
+        interractMode ? 
+          <>
+          
+          </> 
+        : 
+          <RoleInfoDetail info={props.info}/>
+      }
     </MyDialog>
   )
 }

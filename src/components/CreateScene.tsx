@@ -12,7 +12,7 @@ const CreateScene = (props: CreateTimeProps) => {
     props.setOpen(false);
   }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建场景'} onOK={onOK}>
+    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建场景'} onOK={onOK} okText="确定">
       <Typography gutterBottom>
         正在创建场景，请按照下面的指引完成场景设定，然后可以用该场景进行故事创作
       </Typography>
