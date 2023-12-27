@@ -49,7 +49,7 @@ const Story = (props: StoryProps) => {
 
   return (
     <>
-      <Card variant="outlined" style={{border: "none"}}>
+      <Card variant="outlined" style={{ border: "none" }}>
         <CardHeader
           sx={{ height: "10%" }}
           action={
@@ -72,16 +72,20 @@ const Story = (props: StoryProps) => {
           <MenuItem onClick={() => { handleClose(); setSceneDialogOpen(true); }}>查看场景列表</MenuItem>
         </Menu>
         <CardContent>
-          <Stepper nonLinear activeStep={activeStep}>
-            {props.timesteps.map((label, index) => (
-              <Step key={label.id}>
-                <StepButton color="inherit" onClick={() => {
-                  setActiveStep(index);
-                }}>
-                </StepButton>
-              </Step>
-            ))}
-          </Stepper>
+          {
+            props.timesteps.length ?
+              <Stepper nonLinear activeStep={activeStep}>
+                {props.timesteps.map((label, index) => (
+                  <Step key={label.id}>
+                    <StepButton color="inherit" onClick={() => {
+                      setActiveStep(index);
+                    }}>
+                    </StepButton>
+                  </Step>
+                ))}
+              </Stepper> :
+              <></>
+          }
           <br />
           <TimestepInfo
             id={activeStep}
@@ -91,28 +95,28 @@ const Story = (props: StoryProps) => {
           />
           <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} />
           <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} />
-          <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen}/>
-          <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen}/>
-          <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen}/>
+          <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen} />
+          <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen} />
+          <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen} />
 
           <Box sx={{ '& > :not(style)': { m: 1 } }} >
             <Tooltip title="添加时间步">
               <Fab aria-label="AddTimestep" style={{ position: 'fixed', right: 268, bottom: 16 }}
-                onClick={() => {setCreateTimestepDialogOpen(true);}}
+                onClick={() => { setCreateTimestepDialogOpen(true); }}
               >
                 <AccessTimeIcon />
               </Fab>
             </Tooltip>
             <Tooltip title="添加角色">
               <Fab aria-label="AddRole" style={{ position: 'fixed', right: 184, bottom: 16 }}
-                onClick={() => {setCreateRoleDialogOpen(true);}}
+                onClick={() => { setCreateRoleDialogOpen(true); }}
               >
                 <PersonAddIcon />
               </Fab>
             </Tooltip>
             <Tooltip title="添加场景">
               <Fab aria-label="AddScene" style={{ position: 'fixed', right: 100, bottom: 16 }}
-                onClick={() => {setCreateSceneDialogOpen(true);}}
+                onClick={() => { setCreateSceneDialogOpen(true); }}
               >
                 <HouseIcon />
               </Fab>
