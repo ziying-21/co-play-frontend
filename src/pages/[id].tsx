@@ -31,7 +31,9 @@ const Singlestory = () => {
   const timestep5 = new Timestep(5, "阿基米德洗澡", scene1, [role1, role4]);
   return (
     <>
-      <Story id={id} role={[role0, role2, role3, role4, role5, role6]} 
+      <Story 
+      title="示例示例示例示例示例示例示例示例示例示例示例示例五个字"
+      id={id} role={[role0, role2, role3, role4, role5, role6]} 
       scene={[
         scene0,
         scene1,
