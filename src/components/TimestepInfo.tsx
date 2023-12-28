@@ -8,9 +8,9 @@ import RoleInfo from "./RoleInfo";
 import { useState } from "react";
 import Timestep from "@/class/Timestep";
 import SceneInfo from "./SceneInfo";
-import CreateInterraction from "./CreateInterraction";
+import CreateInteraction from "./CreateInteraction";
 import { ColorList } from "@/utils/utils";
-import InterractionInfo from "./InterractionInfo";
+import InteractionInfo from "./InteractionInfo";
 
 interface TimestepInfoProps {
   id: number;
@@ -21,10 +21,10 @@ const TimestepInfo = (props: TimestepInfoProps) => {
 
   const [roleInfoOpen, setRoleInfoOpen] = useState(false);
   const [sceneInfoOpen, setSceneInfoOpen] = useState(false);
-  const [interractionInfoOpen, setInterrInfoOpen] = useState(false);
-  const [createInterractionInfoOpen, setCreateInterrInfoOpen] = useState(false);
+  const [interactionInfoOpen, setInterrInfoOpen] = useState(false);
+  const [createInteractionInfoOpen, setCreateInterrInfoOpen] = useState(false);
   const [selectedRoleIdx, setSelectedRoleIdx] = useState(-1);
-  const [selectedInterractionIdx, setSelectedInterractionIdx] = useState(-1);
+  const [selectedInteractionIdx, setSelectedInteractionIdx] = useState(-1);
   const info = props.info ? props.info : new Timestep();
 
   return (
@@ -85,22 +85,22 @@ const TimestepInfo = (props: TimestepInfoProps) => {
                     交互列表:
                   </Typography>
                   {
-                    info.related_interraction.length ?
+                    info.related_interaction.length ?
                     <List dense>
-                      {props.info.related_interraction.map((interraction, idx) => (
+                      {props.info.related_interaction.map((interaction, idx) => (
                         <ListItem
                           key={idx}
                           secondaryAction={
-                            <Button onClick={() => {setInterrInfoOpen(true); setSelectedInterractionIdx(idx);}}>
+                            <Button onClick={() => {setInterrInfoOpen(true); setSelectedInteractionIdx(idx);}}>
                               查看
                             </Button>
                           }
                         >
-                          <ListItemButton onClick={() => {setInterrInfoOpen(true); setSelectedInterractionIdx(idx);}}>
+                          <ListItemButton onClick={() => {setInterrInfoOpen(true); setSelectedInteractionIdx(idx);}}>
                             <ListItemAvatar>
-                              <Avatar style={{ backgroundColor: ColorList[idx % ColorList.length] }} sizes='large'> {interraction.type[0]} </Avatar>
+                              <Avatar style={{ backgroundColor: ColorList[idx % ColorList.length] }} sizes='large'> {interaction.type[0]} </Avatar>
                             </ListItemAvatar>
-                            {interraction.type}
+                            {interaction.type}
                           </ListItemButton>
                         </ListItem>
                       )
@@ -122,8 +122,8 @@ const TimestepInfo = (props: TimestepInfoProps) => {
           </Grid>
         </CardContent>
       </Card>
-      <CreateInterraction open={createInterractionInfoOpen} setOpen={setCreateInterrInfoOpen}/>
-      <InterractionInfo open={interractionInfoOpen} setOpen={setInterrInfoOpen} info={info.related_interraction[selectedInterractionIdx]}/>
+      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen}/>
+      <InteractionInfo open={interactionInfoOpen} setOpen={setInterrInfoOpen} info={info.related_interaction[selectedInteractionIdx]}/>
       <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_role[selectedRoleIdx]} />
       <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} />
     </>

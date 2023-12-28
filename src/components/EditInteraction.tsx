@@ -1,12 +1,12 @@
-import Interraction from "@/class/Interraction";
+import Interaction from "@/class/Interaction";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
-interface EditInterractionProps {
+interface EditInteractionProps {
   mode: "create" | "update";
-  info?: Interraction;
+  info?: Interaction;
 }
 
-const EditInterraction = (props: EditInterractionProps) => {
+const EditInteraction = (props: EditInteractionProps) => {
   return (
     <>
       <FormControl fullWidth>
@@ -29,4 +29,4 @@ const EditInterraction = (props: EditInterractionProps) => {
   )
 }
 
-export default EditInterraction;
+export default EditInteraction;

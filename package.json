@@ -19,6 +19,7 @@
     "@types/react": "18.2.38",
     "@types/react-dom": "18.2.16",
     "antd": "^5.12.5",
+    "axios": "^1.6.3",
     "eslint": "8.54.0",
     "eslint-config-next": "14.0.3",
     "mui": "^0.0.1",

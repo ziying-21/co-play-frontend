@@ -1,13 +1,13 @@
 import SceneAgent from "@/class/SceneAgent";
 import RoleAgent from "@/class/RoleAgent";
-import Interraction from "./Interraction";
+import Interaction from "./Interaction";
 
 class Timestep {
   id: number;
   title: string;
   related_scene: SceneAgent;
   related_role: RoleAgent[];
-  related_interraction: Interraction[];
+  related_interaction: Interaction[];
 
 
   constructor(
@@ -15,13 +15,13 @@ class Timestep {
     title: string = "",
     related_scene: SceneAgent = new SceneAgent(), 
     related_role: RoleAgent[] = [],
-    related_interraction: Interraction[] = []
+    related_interaction: Interaction[] = []
   ) {
     this.id = id;
     this.title = title;
     this.related_scene = related_scene;
     this.related_role = related_role;
-    this.related_interraction = related_interraction;
+    this.related_interaction = related_interaction;
   }
 }
 

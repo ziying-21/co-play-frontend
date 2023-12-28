@@ -11,11 +11,27 @@ import Typography from '@mui/material/Typography'
 import type { AppProps } from 'next/app'
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import { useRouter } from 'next/router'
+// import { request } from '@/utils/network'
+// import { message } from 'antd'
+import { useState } from 'react'
 
 const drawerWidth = 240;
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  const [storyList, setStoryList] = useState<{id: number, title:string}[]>([])
+  
+  // useEffect(() => {
+  //   request("/api/story", "GET")
+  //     .then((response) => {
+  //       const newStories = response.data.stories;
+  //       setStoryList(newStories);
+  //     })
+  //     .catch(() => {
+  //       message.error("获取故事列表失败，请稍后重试")
+  //     })
+  // }, [])
+
   return (
     <>
       <Box sx={{ display: 'flex' }}>
