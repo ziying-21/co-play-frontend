@@ -1,12 +1,11 @@
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { blue, green, red } from '@mui/material/colors';
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, Grid, List, ListItem, ListItemAvatar, ListItemButton } from "@mui/material";
 import RoleInfo from "./RoleInfo";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Timestep from "@/class/Timestep";
 import SceneInfo from "./SceneInfo";
 import CreateInterraction from "./CreateInterraction";
