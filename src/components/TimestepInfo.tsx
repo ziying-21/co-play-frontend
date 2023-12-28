@@ -20,12 +20,11 @@ const TimestepInfo = (props: TimestepInfoProps) => {
   const [roleInfoOpen, setRoleInfoOpen] = useState(false);
   const [sceneInfoOpen, setSceneInfoOpen] = useState(false);
   const [selectedRoleIdx, setSelectedRoleIdx] = useState(-1);
-  
   const info = props.info ? props.info : new Timestep();
 
   return (
     <>
-      <Card sx={{ maxWidth: "100%" }} variant="outlined" style={{border: "none"}}>
+      <Card sx={{ maxWidth: "100%" }} variant="outlined" style={{ border: "none" }}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -33,7 +32,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
             </Avatar>
           }
           action={
-            <Button aria-label="settings" onClick={() => {setSceneInfoOpen(true)}} id="more-list">
+            <Button aria-label="settings" onClick={() => { setSceneInfoOpen(true) }} id="more-list">
               查看场景
             </Button>
           }
@@ -48,32 +47,31 @@ const TimestepInfo = (props: TimestepInfoProps) => {
             <Grid item xs={6} md={6}>
               <Card>
                 <CardContent >
-                  <Typography variant="h5" style={{textAlign: "center"}}>
+                  <Typography variant="h5" style={{ textAlign: "center" }}>
                     关联角色:
                   </Typography>
-                    {info.related_role.map((role, index) => (
-                      <Typography variant="h5" key={index}  style={{textAlign: "center"}}>
-                        <Button onClick={() => {setSelectedRoleIdx(index); setRoleInfoOpen(true)}}> {role.name} </Button>
-                      </Typography>
-                    ))}
-                  <Button style={{width: "100%"}}> 编辑角色 </Button>
+                  {info.related_role.map((role, index) => (
+                    <Typography variant="h5" key={index} style={{ textAlign: "center" }}>
+                      <Button onClick={() => { setSelectedRoleIdx(index); setRoleInfoOpen(true) }}> {role.name} </Button>
+                    </Typography>
+                  ))}
                 </CardContent>
               </Card>
             </Grid>
             <Grid item xs={6} md={6}>
               <Card>
                 <CardContent>
-                  <Typography variant="h5" style={{textAlign: "center"}}>
+                  <Typography variant="h5" style={{ textAlign: "center" }}>
                     交互列表:
                   </Typography>
                   {
                     info.related_role.map((role, index) => (
-                      <Typography variant="h5" key={index}  style={{textAlign: "center"}}>
+                      <Typography variant="h5" key={index} style={{ textAlign: "center" }}>
                         <Button> {role.name} </Button>
                       </Typography>
                     ))
                   }
-                  <Button style={{width: "100%"}}> 编辑交互 </Button>
+                  <Button style={{ width: "100%" }}> 编辑交互 </Button>
                 </CardContent>
               </Card>
             </Grid>

@@ -3,10 +3,8 @@ import MyDialog from './MyDialog';
 import RoleAgent from "@/class/RoleAgent";
 import List from '@mui/material/List';
 import { Avatar, Button, ListItem, ListItemAvatar, ListItemButton } from '@mui/material';
-import { deepOrange, deepPurple, green, pink } from '@mui/material/colors';
 import { ColorList } from '@/utils/utils';
 import RoleInfoDetail from './RoleInfoDetail';
-
 
 interface RoleListProps {
   open: boolean;
@@ -33,12 +31,12 @@ const RoleList = (props: RoleListProps) => {
             <ListItem
               key={idx}
               secondaryAction={
-                <Button onClick={() => {setSingleRoleMode(true)}}>
+                <Button onClick={() => {setSingleRoleMode(true); setSelectedRoleIdx(idx);}}>
                   查看
                 </Button>
               }
             >
-              <ListItemButton onClick={() => {setSingleRoleMode(true)}}>
+              <ListItemButton onClick={() => {setSingleRoleMode(true); setSelectedRoleIdx(idx);}}>
                 <ListItemAvatar>
                   <Avatar style={{ backgroundColor: ColorList[idx % ColorList.length] }} sizes='large'> {role.name[0]} </Avatar>
                 </ListItemAvatar>

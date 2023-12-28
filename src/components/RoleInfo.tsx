@@ -2,6 +2,7 @@ import RoleAgent from "@/class/RoleAgent";
 import MyDialog from "./MyDialog";
 import { Dispatch, SetStateAction, useState } from 'react';
 import RoleInfoDetail from "./RoleInfoDetail";
+import Chat from "./Chat";
 
 interface RoleInfoProps {
   open: boolean;
@@ -17,9 +18,7 @@ const RoleInfo = (props: RoleInfoProps) => {
     <MyDialog open={props.open} setOpen={props.setOpen} onOK={onOK} okText={interractMode ? "返回详情界面" : "点击此处和TA对话"} title={info.name}>
       {
         interractMode ? 
-          <>
-          
-          </> 
+          <Chat role={props.info}/> 
         : 
           <RoleInfoDetail info={props.info}/>
       }

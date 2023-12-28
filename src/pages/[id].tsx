@@ -4,25 +4,28 @@ import RoleAgent from "@/class/RoleAgent";
 import SceneAgent from "@/class/SceneAgent";
 import Timestep from "@/class/Timestep";
 
-export interface SinglestoryProps {
+export interface SingleStoryProps {
   id: number;
   title: string;
+  roles: RoleAgent[];
+  scenes: SceneAgent[];
+  timesteps: Timestep[];
 }
 
 const Singlestory = () => {
   const router = useRouter();
   const { id } = router.query;
-  const role0 = new RoleAgent("示例", 18, "男");
-  const role1 = new RoleAgent("示例", 19, "男");
-  const role2 = new RoleAgent("示例", 20, "男");
-  const role3 = new RoleAgent("示例", 18, "女");
-  const role4 = new RoleAgent("示例", 21, "女");
-  const role5 = new RoleAgent("示例", 23, "男");
-  const role6 = new RoleAgent("示例", 17, "男");
-  const scene0 = new SceneAgent("示例", "示例", "示例", ["示例"], ["示例"], ["示例"]);
-  const scene1 = new SceneAgent("示例", "示例", "示例", ["示例"], ["示例"], ["示例"]);
-  const scene2 = new SceneAgent("示例", "示例", "示例", ["示例"], ["示例"], ["示例"]);
-  const scene3 = new SceneAgent("示例", "示例", "示例", ["示例"], ["示例"], ["示例"]);
+  const role0 = new RoleAgent("示例1", 18, "男");
+  const role1 = new RoleAgent("示例2", 19, "男");
+  const role2 = new RoleAgent("示例3", 20, "男");
+  const role3 = new RoleAgent("示例4", 18, "女");
+  const role4 = new RoleAgent("示例5", 21, "女");
+  const role5 = new RoleAgent("示例6", 23, "男");
+  const role6 = new RoleAgent("示例7", 17, "男");
+  const scene0 = new SceneAgent("示例1", "示例", "示例", ["示例"], ["示例"], ["示例"]);
+  const scene1 = new SceneAgent("示例2", "示例", "示例", ["示例"], ["示例"], ["示例"]);
+  const scene2 = new SceneAgent("示例3", "示例", "示例", ["示例"], ["示例"], ["示例"]);
+  const scene3 = new SceneAgent("示例4", "示例", "示例", ["示例"], ["示例"], ["示例"]);
   const timestep0 = new Timestep(0, "布鲁诺坚持日心说", scene0, [role0, role1, role2, role3, role5]);
   const timestep1 = new Timestep(1, "牛顿被苹果砸中", scene0, [role1, role6]);
   const timestep2 = new Timestep(2, "高斯尺规作出正17边形", scene2, [role2, role3]);

@@ -30,7 +30,6 @@ interface StoryProps {
   timesteps: Timestep[];
 }
 
-
 const Story = (props: StoryProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const [roleDialogOpen, setRoleDialogOpen] = useState(false);
