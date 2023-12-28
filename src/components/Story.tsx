@@ -119,7 +119,7 @@ const Story = (props: StoryProps) => {
                 <HouseIcon />
               </Fab>
             </Tooltip>
-            <Tooltip title="生成情节">
+            <Tooltip title="为当前时间步生成故事">
               <Fab color="primary" aria-label="Generate" style={{ position: 'fixed', right: 16, bottom: 16 }}>
                 <SmartToyIcon />
               </Fab>

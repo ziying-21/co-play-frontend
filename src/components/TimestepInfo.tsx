@@ -1,15 +1,17 @@
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import { red } from '@mui/material/colors';
+import { blue, green, red } from '@mui/material/colors';
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, List, ListItem, ListItemAvatar, ListItemButton } from "@mui/material";
 import RoleInfo from "./RoleInfo";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Timestep from "@/class/Timestep";
 import SceneInfo from "./SceneInfo";
-import { Result } from "antd";
+import CreateInterraction from "./CreateInterraction";
+import { ColorList } from "@/utils/utils";
+import InterractionInfo from "./InterractionInfo";
 
 interface TimestepInfoProps {
   id: number;
@@ -20,7 +22,10 @@ const TimestepInfo = (props: TimestepInfoProps) => {
 
   const [roleInfoOpen, setRoleInfoOpen] = useState(false);
   const [sceneInfoOpen, setSceneInfoOpen] = useState(false);
+  const [interractionInfoOpen, setInterrInfoOpen] = useState(false);
+  const [createInterractionInfoOpen, setCreateInterrInfoOpen] = useState(false);
   const [selectedRoleIdx, setSelectedRoleIdx] = useState(-1);
+  const [selectedInterractionIdx, setSelectedInterractionIdx] = useState(-1);
   const info = props.info ? props.info : new Timestep();
 
   return (
@@ -28,7 +33,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
       <Card sx={{ maxWidth: "100%" }} variant="outlined" style={{ border: "none" }}>
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            <Avatar aria-label="recipe">
               {props.id + 1}
             </Avatar>
           }
@@ -51,11 +56,26 @@ const TimestepInfo = (props: TimestepInfoProps) => {
                   <Typography variant="h5" style={{ textAlign: "center" }}>
                     关联角色:
                   </Typography>
-                  {info.related_role.map((role, index) => (
-                    <Typography variant="h5" key={index} style={{ textAlign: "center" }}>
-                      <Button onClick={() => { setSelectedRoleIdx(index); setRoleInfoOpen(true) }}> {role.name} </Button>
-                    </Typography>
-                  ))}
+                  <List dense>
+                    {props.info.related_role.map((role, idx) => (
+                      <ListItem
+                        key={idx}
+                        secondaryAction={
+                          <Button onClick={() => {setRoleInfoOpen(true); setSelectedRoleIdx(idx);}}>
+                            查看
+                          </Button>
+                        }
+                      >
+                        <ListItemButton onClick={() => {setRoleInfoOpen(true); setSelectedRoleIdx(idx);}}>
+                          <ListItemAvatar>
+                            <Avatar style={{ backgroundColor: ColorList[idx % ColorList.length] }} sizes='large'> {role.name[0]} </Avatar>
+                          </ListItemAvatar>
+                          {role.name}
+                        </ListItemButton>
+                      </ListItem>
+                    )
+                    )}
+                  </List>
                 </CardContent>
               </Card>
             </Grid>
@@ -67,24 +87,44 @@ const TimestepInfo = (props: TimestepInfoProps) => {
                   </Typography>
                   {
                     info.related_interraction.length ?
+                    <List dense>
+                      {props.info.related_interraction.map((interraction, idx) => (
+                        <ListItem
+                          key={idx}
+                          secondaryAction={
+                            <Button onClick={() => {setInterrInfoOpen(true); setSelectedInterractionIdx(idx);}}>
+                              查看
+                            </Button>
+                          }
+                        >
+                          <ListItemButton onClick={() => {setInterrInfoOpen(true); setSelectedInterractionIdx(idx);}}>
+                            <ListItemAvatar>
+                              <Avatar style={{ backgroundColor: ColorList[idx % ColorList.length] }} sizes='large'> {interraction.type[0]} </Avatar>
+                            </ListItemAvatar>
+                            {interraction.type}
+                          </ListItemButton>
+                        </ListItem>
+                      )
+                      )}
+                    </List>
+                      :
                       <>
-                        {info.related_interraction.map((role, index) => (
-                          <Typography variant="h5" key={index} style={{ textAlign: "center" }}>
-                            <Button> {role.name} </Button>
-                          </Typography>
-                        ))}
-
-                        <Button style={{ width: "100%" }}> 编辑交互 </Button>
+                        <br/>
+                        <Typography variant="body1" style={{ textAlign: "center" }}>
+                          这里空空如也，请先创建初始交互
+                        </Typography>
                       </>
-                      : <></>
                   }
-
+                  <br/>
+                  <Button style={{ width: "100%" }} onClick={() => {setCreateInterrInfoOpen(true)}}> 创建新交互 </Button>
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
         </CardContent>
       </Card>
+      <CreateInterraction open={createInterractionInfoOpen} setOpen={setCreateInterrInfoOpen}/>
+      <InterractionInfo open={interractionInfoOpen} setOpen={setInterrInfoOpen} info={info.related_interraction[selectedInterractionIdx]}/>
       <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_role[selectedRoleIdx]} />
       <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} />
     </>

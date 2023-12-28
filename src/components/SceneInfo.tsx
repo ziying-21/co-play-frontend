@@ -12,7 +12,7 @@ interface SceneInfoProps {
 const SceneInfo = (props: SceneInfoProps) => {
   const onOK = () => {props.setOpen(false)}
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} onOK={onOK} onClose={onOK} okText="确定" title={props.info.place}>
+    <MyDialog open={props.open} setOpen={props.setOpen} onOK={onOK} onClose={onOK} okText="取消" title={props.info.place}>
       <EditScene mode={"update"} info={props.info}/>
     </MyDialog>
   )
