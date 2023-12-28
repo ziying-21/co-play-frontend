@@ -4,7 +4,7 @@ import RoleAgent from "@/class/RoleAgent";
 import List from '@mui/material/List';
 import { Avatar, Button, ListItem, ListItemAvatar, ListItemButton } from '@mui/material';
 import { ColorList } from '@/utils/utils';
-import RoleInfoDetail from './RoleInfoDetail';
+import EditRole from './EditRole';
 
 interface RoleListProps {
   open: boolean;
@@ -22,10 +22,14 @@ const RoleList = (props: RoleListProps) => {
       props.setOpen(false);
     }
   }
+  const onClose = () => {
+    setSingleRoleMode(false);
+    props.setOpen(false);
+  }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={'角色列表 - 查看角色并编辑'} onOK={onOK} okText={singleRoleMode?"回到角色列表":"确定"}>
+    <MyDialog open={props.open} setOpen={props.setOpen} title={'角色列表 - 查看角色并编辑'} onOK={onOK} onClose={onClose} okText={singleRoleMode?"回到角色列表":"确定"}>
       {singleRoleMode ?
-        <RoleInfoDetail info={props.roles[selectedRoleIdx]} /> :
+        <EditRole mode='update' info={props.roles[selectedRoleIdx]} /> :
         <List dense>
           {props.roles.map((role, idx) => (
             <ListItem

@@ -17,6 +17,7 @@ interface MyDialogProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   onOK: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   okText: string;
   children?: React.ReactNode;
   title: string;
@@ -35,7 +36,7 @@ const MyDialog = (props: MyDialogProps) => {
         <IconButton
           aria-label="close"
           sx={{ position: 'absolute', right: 8, top: 8, color: (theme) => theme.palette.grey[500] }}
-          onClick={() => {props.setOpen(false);}}
+          onClick={props.onClose}
         >
           <CloseIcon />
         </IconButton>

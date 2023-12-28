@@ -9,10 +9,10 @@ interface CreateStoryProps {
 
 const CreateStory = (props: CreateStoryProps) => {
   const onOK = () => {
-    // TODO
+    props.setOpen(false);
   }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建一个新故事'} onOK={onOK} okText="确定">
+    <MyDialog open={props.open} setOpen={props.setOpen} title={'创建一个新故事'} onOK={onOK} onClose={onOK} okText="确定创建">
       <>
         <Typography variant="body1">
           正在创建您的故事，请按照下面的指引完成故事的初始设定，然后进行创作

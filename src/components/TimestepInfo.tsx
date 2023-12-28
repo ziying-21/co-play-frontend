@@ -9,6 +9,7 @@ import RoleInfo from "./RoleInfo";
 import { useState } from "react";
 import Timestep from "@/class/Timestep";
 import SceneInfo from "./SceneInfo";
+import { Result } from "antd";
 
 interface TimestepInfoProps {
   id: number;
@@ -65,13 +66,19 @@ const TimestepInfo = (props: TimestepInfoProps) => {
                     交互列表:
                   </Typography>
                   {
-                    info.related_role.map((role, index) => (
-                      <Typography variant="h5" key={index} style={{ textAlign: "center" }}>
-                        <Button> {role.name} </Button>
-                      </Typography>
-                    ))
+                    info.related_interraction.length ?
+                      <>
+                        {info.related_interraction.map((role, index) => (
+                          <Typography variant="h5" key={index} style={{ textAlign: "center" }}>
+                            <Button> {role.name} </Button>
+                          </Typography>
+                        ))}
+
+                        <Button style={{ width: "100%" }}> 编辑交互 </Button>
+                      </>
+                      : <></>
                   }
-                  <Button style={{ width: "100%" }}> 编辑交互 </Button>
+
                 </CardContent>
               </Card>
             </Grid>

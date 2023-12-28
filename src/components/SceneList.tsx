@@ -3,7 +3,7 @@ import MyDialog from './MyDialog';
 import SceneAgent from '@/class/SceneAgent';
 import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemButton } from '@mui/material';
 import { ColorList } from '@/utils/utils';
-import SceneInfoDetail from './SceneInfoDetail';
+import EditScene from './EditScene';
 
 interface SceneListProps {
   open: boolean;
@@ -21,10 +21,14 @@ const SceneList = (props: SceneListProps) => {
       props.setOpen(false);
     }
   }
+  const onClose = () => {
+    setSingleRoleMode(false);
+    props.setOpen(false);
+  }
   return (
-    <MyDialog open={props.open} setOpen={props.setOpen} title={singleSceneMode? props.scenes[selectedSceneIdx].place : '场景列表 - 查看场景并编辑'} onOK={onOK} okText={singleSceneMode?"回到场景列表":"确定"}>
+    <MyDialog open={props.open} setOpen={props.setOpen} onClose={onClose} title={singleSceneMode? props.scenes[selectedSceneIdx].place : '场景列表 - 查看场景并编辑'} onOK={onOK} okText={singleSceneMode?"回到场景列表":"确定"}>
       {singleSceneMode ?
-        <SceneInfoDetail info={props.scenes[selectedSceneIdx]} /> :
+        <EditScene mode='update' info={props.scenes[selectedSceneIdx]} /> :
         <List dense>
           {props.scenes.map((scene, idx) => (
             <ListItem
