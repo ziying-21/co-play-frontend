@@ -96,7 +96,7 @@ const Story = (props: StoryProps) => {
           <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene}/>
           <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen} />
           <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen} />
-          <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen} />
+          <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen} roles={props.role} scenes={props.scene} />
 
           <Box sx={{ '& > :not(style)': { m: 1 } }} >
             <Tooltip title="添加时间步">

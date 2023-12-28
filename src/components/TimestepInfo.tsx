@@ -122,7 +122,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
           </Grid>
         </CardContent>
       </Card>
-      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen}/>
+      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen} related_timestep_id={info.id}/>
       <InteractionInfo open={interactionInfoOpen} setOpen={setInterrInfoOpen} info={info.related_interaction[selectedInteractionIdx]}/>
       <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_role[selectedRoleIdx]} />
       <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} />
