@@ -89,7 +89,8 @@ const Story = (props: StoryProps) => {
                   info={props.timesteps[activeStep]}
                 />
               </>
-              : <Result status="404" title="当前故事时间步为空" subTitle="请先创建时间步" />
+              // : <Result status="404" title="当前故事时间步为空" subTitle="请先创建时间步" />
+              :<>当前故事时间步为空</>
           }
           <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} roles={props.role}/>
           <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene}/>

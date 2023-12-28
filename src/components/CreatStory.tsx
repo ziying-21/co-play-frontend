@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import MyDialog from "./MyDialog";
 import { Button, TextField, Typography } from "@mui/material";
 import { request } from "@/utils/network";
-import { message } from "antd";
+// import { message } from "antd";
 import { useRouter } from "next/router";
 
 interface CreateStoryProps {
@@ -18,7 +18,7 @@ const CreateStory = (props: CreateStoryProps) => {
 
   const onSubmit = () => {
     if (title == "") {
-      message.warning("故事标题不得为空");
+      // message.warning("故事标题不得为空");
       return;
     }
     request("/api/story/create", "POST", {
@@ -27,10 +27,10 @@ const CreateStory = (props: CreateStoryProps) => {
       })
       .then((response) => {
         router.push(`/${response.data.id}`)
-        message.success("任务创建成功")
+        // message.success("任务创建成功")
       })
       .catch(() => {
-        message.error("任务创建失败")
+        // message.error("任务创建失败")
       })
   }
 

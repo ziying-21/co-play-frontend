@@ -12,19 +12,19 @@ interface ChatProps {
 const Chat = (props: ChatProps) => {
   const [chatTurns, setChatTurns] = useState<ChatTurn[]>([
     new ChatTurn("assistant", "你好，有什么可以帮助你的吗？你好，有什么可以帮助你的吗？你好，有什么可以帮助你的吗？你好，有什么可以帮助你的吗？你好，有什么可以帮助你的吗？"),
-    // new ChatTurn("user", "你好，我想和你交谈"),
-    // new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
-    // new ChatTurn("user", "你好，我想和你交谈"),
-    // new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
-    // new ChatTurn("user", "你好，我想和你交谈"),
-    // new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
-    // new ChatTurn("user", "你好，我想和你交谈"),
-    // new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
-    // new ChatTurn("user", "你好，我想和你交谈"),
-    // new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
-    // new ChatTurn("user", "你好，我想和你交谈"),
-    // new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
-    // new ChatTurn("user", "你好，我想和你交谈"),
+    new ChatTurn("user", "你好，我想和你交谈"),
+    new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
+    new ChatTurn("user", "你好，我想和你交谈"),
+    new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
+    new ChatTurn("user", "你好，我想和你交谈"),
+    new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
+    new ChatTurn("user", "你好，我想和你交谈"),
+    new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
+    new ChatTurn("user", "你好，我想和你交谈"),
+    new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
+    new ChatTurn("user", "你好，我想和你交谈"),
+    new ChatTurn("assistant", "你好，有什么可以帮助你的吗？"),
+    new ChatTurn("user", "你好，我想和你交谈"),
   ]);
   return (
     <>

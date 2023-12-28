@@ -6,7 +6,6 @@ import { blue } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { useState } from 'react';
-import MyDialog from '@/components/MyDialog';
 import CreateStory from '@/components/CreatStory';
 
 const Home = () => {
