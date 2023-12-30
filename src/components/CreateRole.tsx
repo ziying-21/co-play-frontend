@@ -4,6 +4,7 @@ import { TextField, Typography } from "@mui/material";
 import EditRole from "./EditRole";
 
 interface CreateRoleProps {
+  story_id: number;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -18,7 +19,7 @@ const CreateRole = (props: CreateRoleProps) => {
         正在创建角色，请按照下面的指引完成角色设定，然后可以用该角色进行故事创作
       </Typography>
       <br/>
-      <EditRole mode={"create"}/>
+      <EditRole mode={"create"} story_id={props.story_id}/>
     </MyDialog>
   )
 };
