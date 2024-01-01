@@ -1,6 +1,7 @@
 import SceneAgent from "@/class/SceneAgent";
 import { request } from "@/utils/network";
-import { Button, TextField } from "@mui/material";
+import { Button, FormControlLabel, Switch, TextField, Tooltip } from "@mui/material";
+import { Divider } from "antd";
 import { useState } from "react";
 
 interface EditSceneProps {
@@ -11,11 +12,12 @@ interface EditSceneProps {
 
 const EditScene = (props: EditSceneProps) => {
 
-  const [place, setPlace] = useState("");
-  const [time, setTime] = useState("");
-  const [atmosphere, setAtmosphere] = useState("");
-  const [feeling, setFeeling] = useState("");
-  const [otherInformation, setOtherInformation] = useState("");
+  const [place, setPlace] = useState(props.info?props.info.place:"");
+  const [time, setTime] = useState(props.info?props.info.time:"");
+  const [atmosphere, setAtmosphere] = useState(props.info?props.info.atmosphere.join('\n'):"");
+  const [feeling, setFeeling] = useState(props.info?props.info.feeling.join('\n'):"");
+  const [otherInformation, setOtherInformation] = useState(props.info?props.info.otherInformation.join('\n'):"");
+  const [needCompletion, setNeedCompletion] = useState(false);
 
   const onSubmit = () => {
     request(`/api/scene/${props.mode}`, "POST", {
@@ -37,15 +39,19 @@ const EditScene = (props: EditSceneProps) => {
 
   return (
     <>
-      <TextField label="位置" variant="outlined" defaultValue={props.info?.place} onChange={(e) => {setPlace(e.target.value);}}/>
+      <TextField label="位置" variant="outlined" defaultValue={place} onChange={(e) => {setPlace(e.target.value);}}/>
+      <Divider type="vertical" />
+      <Tooltip title="你可以只指定部分内容，剩余信息由LLM补全">
+        <FormControlLabel control={<Switch disabled={props.mode=="update"} onChange={(e) => { setNeedCompletion(e.target.checked) }} />} label="是否自动补全" />
+      </Tooltip>
       <br /><br />
-      <TextField label="时间" variant="outlined" defaultValue={props.info?.time} onChange={(e) => {setTime(e.target.value);}}/>
+      <TextField label="时间" variant="outlined" fullWidth defaultValue={time} onChange={(e) => {setTime(e.target.value);}}/>
       <br /><br />
-      <TextField label="氛围描述" variant="outlined" fullWidth multiline defaultValue={props.info?.atmosphere.join('\n')} onChange={(e) => {setAtmosphere(e.target.value);}}/>
+      <TextField label="氛围描述" variant="outlined" fullWidth multiline defaultValue={atmosphere} onChange={(e) => {setAtmosphere(e.target.value);}}/>
       <br /><br />
-      <TextField label="感官描述" variant="outlined" fullWidth multiline defaultValue={props.info?.feeling.join('\n')} onChange={(e) => {setFeeling(e.target.value);}}/>
+      <TextField label="感官描述" variant="outlined" fullWidth multiline defaultValue={feeling} onChange={(e) => {setFeeling(e.target.value);}}/>
       <br /><br />
-      <TextField label="其他信息(可选)" variant="outlined" fullWidth multiline defaultValue={props.info?.otherInformation.join('\n')} onChange={(e) => {setOtherInformation(e.target.value);}}/>
+      <TextField label="其他信息(可选)" variant="outlined" fullWidth multiline defaultValue={otherInformation} onChange={(e) => {setOtherInformation(e.target.value);}}/>
       <br /><br />
       <Button fullWidth onClick={onSubmit}> 确认当前编辑 </Button>
     </>

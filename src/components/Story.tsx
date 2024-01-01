@@ -21,7 +21,6 @@ import { Card, CardContent, CardHeader, IconButton, Menu, MenuItem } from "@mui/
 import CreateRole from "./CreateRole";
 import CreateScene from "./CreateScene";
 import CreateTimestep from "./CreateTimestep";
-import { Result } from "antd";
 import AutoInteraction from "./AutoInteraction";
 
 interface StoryProps {
@@ -88,19 +87,20 @@ const Story = (props: StoryProps) => {
                 </Stepper>
                 <br />
                 <TimestepInfo
-                  id={activeStep}
-                  info={props.timesteps[activeStep]}
+                  index={activeStep}
+                  info={props.timesteps[activeStep]} 
+                  story_id={props.id} 
                 />
               </>
               // : <Result status="404" title="当前故事时间步为空" subTitle="请先创建时间步" />
               :<>当前故事时间步为空</>
           }
-          <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} roles={props.role}/>
-          <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene}/>
+          <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} roles={props.role} story_id={props.id}/>
+          <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene} story_id={props.id}/>
           <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen} story_id={props.id}/>
           <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen} story_id={props.id}/>
           <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen} roles={props.role} scenes={props.scene} />
-          <AutoInteraction open={autoInteractionDialogOpen} setOpen={setAutoInteractionDialogOpen} role={props.role}/>
+          <AutoInteraction open={autoInteractionDialogOpen} setOpen={setAutoInteractionDialogOpen} role={props.role} interactions={props.timesteps[activeStep].related_interaction} timestep_id={props.timesteps[activeStep].id}/>
 
           <Box sx={{ '& > :not(style)': { m: 1 } }} >
             <Tooltip title="添加时间步">

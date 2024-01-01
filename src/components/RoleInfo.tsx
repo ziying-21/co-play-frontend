@@ -5,6 +5,7 @@ import Chat from "./Chat";
 import EditRole from "./EditRole";
 
 interface RoleInfoProps {
+  story_id: number;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   info: RoleAgent
@@ -21,7 +22,7 @@ const RoleInfo = (props: RoleInfoProps) => {
         interractMode ? 
           <Chat role={props.info}/> 
         : 
-          <EditRole mode="update" info={props.info}/>
+          <EditRole mode="update" info={props.info} story_id={props.story_id}/>
       }
     </MyDialog>
   )

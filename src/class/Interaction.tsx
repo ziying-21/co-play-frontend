@@ -1,18 +1,35 @@
+import RoleAgent from "./RoleAgent";
+
 class Interaction {
   id: number; 
+  role: RoleAgent;
   related_timestep_id: number;
-  type: "movement" | "expression" | "emotion" | "speech";
-  description: string;
+  info: {
+    "movement": string[], 
+    "expression": string[], 
+    "speech": string[], 
+    "emotion": string[]
+  }
   constructor(
     id: number = 0,
+    role: RoleAgent = new RoleAgent(),
     related_timestep_id: number = 0,
-    type: "movement" | "expression" | "emotion" | "speech" = "movement",
-    description: string = ""
+    info: {
+      "movement": string[], 
+      "expression": string[], 
+      "speech": string[], 
+      "emotion": string[]
+    } = {
+      "movement": [], 
+      "expression": [], 
+      "speech": [], 
+      "emotion": []
+    }
   ) {
     this.id = id;
+    this.role = role;
     this.related_timestep_id = related_timestep_id;
-    this.type = type;
-    this.description = description;
+    this.info = info;
   }
 }
 

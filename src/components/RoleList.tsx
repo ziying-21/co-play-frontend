@@ -10,6 +10,7 @@ interface RoleListProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   roles: RoleAgent[];
+  story_id: number;
 }
 
 const RoleList = (props: RoleListProps) => {
@@ -29,7 +30,7 @@ const RoleList = (props: RoleListProps) => {
   return (
     <MyDialog open={props.open} setOpen={props.setOpen} title={'角色列表 - 查看角色并编辑'} onOK={onOK} onClose={onClose} okText={singleRoleMode?"回到角色列表":"确定"}>
       {singleRoleMode ?
-        <EditRole mode='update' info={props.roles[selectedRoleIdx]} /> :
+        <EditRole mode='update' info={props.roles[selectedRoleIdx]} story_id={props.story_id} /> :
         <List dense>
           {props.roles.map((role, idx) => (
             <ListItem

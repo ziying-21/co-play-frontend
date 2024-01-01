@@ -11,9 +11,11 @@ import SceneInfo from "./SceneInfo";
 import CreateInteraction from "./CreateInteraction";
 import { ColorList } from "@/utils/utils";
 import InteractionInfo from "./InteractionInfo";
+import EditInteraction from "./EditInteraction";
 
 interface TimestepInfoProps {
-  id: number;
+  story_id: number;
+  index: number;
   info: Timestep
 }
 
@@ -33,7 +35,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
         <CardHeader
           avatar={
             <Avatar aria-label="recipe">
-              {props.id + 1}
+              {props.index + 1}
             </Avatar>
           }
           action={
@@ -82,50 +84,22 @@ const TimestepInfo = (props: TimestepInfoProps) => {
               <Card>
                 <CardContent>
                   <Typography variant="h5" style={{ textAlign: "center" }}>
-                    交互列表:
+                    初始交互:
                   </Typography>
-                  {
-                    info.related_interaction.length ?
-                    <List dense>
-                      {props.info.related_interaction.map((interaction, idx) => (
-                        <ListItem
-                          key={idx}
-                          secondaryAction={
-                            <Button onClick={() => {setInterrInfoOpen(true); setSelectedInteractionIdx(idx);}}>
-                              查看
-                            </Button>
-                          }
-                        >
-                          <ListItemButton onClick={() => {setInterrInfoOpen(true); setSelectedInteractionIdx(idx);}}>
-                            <ListItemAvatar>
-                              <Avatar style={{ backgroundColor: ColorList[idx % ColorList.length] }} sizes='large'> {interaction.type[0]} </Avatar>
-                            </ListItemAvatar>
-                            {interaction.type}
-                          </ListItemButton>
-                        </ListItem>
-                      )
-                      )}
-                    </List>
-                      :
-                      <>
-                        <br/>
-                        <Typography variant="body1" style={{ textAlign: "center" }}>
-                          这里空空如也，请先创建初始交互
-                        </Typography>
-                      </>
-                  }
                   <br/>
-                  <Button style={{ width: "100%" }} onClick={() => {setCreateInterrInfoOpen(true)}}> 创建新交互 </Button>
+                  <EditInteraction key={props.info.id} roles={props.info.related_role} related_timestep_ids={props.info.id} mode={info.related_interaction.length ? "update" : "create" } info={info.related_interaction.length ? info.related_interaction[0] : undefined}/>
+                  <br/>
+                  {/* <Button style={{ width: "100%" }} onClick={() => {setCreateInterrInfoOpen(true)}}> 创建新交互 </Button> */}
                 </CardContent>
               </Card>
             </Grid>
           </Grid>
         </CardContent>
       </Card>
-      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen} related_timestep_id={info.id}/>
-      <InteractionInfo open={interactionInfoOpen} setOpen={setInterrInfoOpen} info={info.related_interaction[selectedInteractionIdx]}/>
-      <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_role[selectedRoleIdx]} />
-      <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} />
+      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen} related_timestep_id={info.id} roles={info.related_role}/>
+      <InteractionInfo open={interactionInfoOpen} setOpen={setInterrInfoOpen} info={info.related_interaction[selectedInteractionIdx]} roles={info.related_role}/>
+      <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_role[selectedRoleIdx]} story_id={props.story_id} />
+      <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} story_id={props.story_id} />
     </>
   )
 };
