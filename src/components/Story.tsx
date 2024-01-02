@@ -4,7 +4,7 @@ import Timestep from "@/class/Timestep";
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
-import { SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -22,6 +22,7 @@ import CreateRole from "./CreateRole";
 import CreateScene from "./CreateScene";
 import CreateTimestep from "./CreateTimestep";
 import AutoInteraction from "./AutoInteraction";
+import Generate from "./Generate";
 
 interface StoryProps {
   id: any;
@@ -29,6 +30,8 @@ interface StoryProps {
   role: RoleAgent[];
   scene: SceneAgent[];
   timesteps: Timestep[];
+  refresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
 }
 
 const Story = (props: StoryProps) => {
@@ -40,6 +43,7 @@ const Story = (props: StoryProps) => {
   const [createTimestepDialogOpen, setCreateTimestepDialogOpen] = useState(false);
   const [autoInteractionDialogOpen, setAutoInteractionDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [generateDialogOpen, setGenerateDialogOpen] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -47,6 +51,8 @@ const Story = (props: StoryProps) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  console.log(props.title)
 
   return (
     <>
@@ -88,19 +94,20 @@ const Story = (props: StoryProps) => {
                 <br />
                 <TimestepInfo
                   index={activeStep}
-                  info={props.timesteps[activeStep]} 
-                  story_id={props.id} 
-                />
+                  info={props.timesteps[activeStep]}
+                  story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh}                />
+                <AutoInteraction open={autoInteractionDialogOpen} setOpen={setAutoInteractionDialogOpen} role={props.timesteps[activeStep].related_roles} interactions={props.timesteps[activeStep].interactions} timestep_id={props.timesteps[activeStep].id} story_id={props.id} fresh={props.refresh} setRefresh={props.setRefresh}/>
+                <Generate refresh={props.refresh} setRefresh={props.setRefresh} story_id={props.id} open={generateDialogOpen} setOpen={setGenerateDialogOpen} timestep_id={props.timesteps[activeStep].id}/>
               </>
               // : <Result status="404" title="当前故事时间步为空" subTitle="请先创建时间步" />
               :<>当前故事时间步为空</>
           }
-          <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} roles={props.role} story_id={props.id}/>
-          <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene} story_id={props.id}/>
-          <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen} story_id={props.id}/>
-          <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen} story_id={props.id}/>
-          <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen} roles={props.role} scenes={props.scene} />
-          <AutoInteraction open={autoInteractionDialogOpen} setOpen={setAutoInteractionDialogOpen} role={props.role} interactions={props.timesteps[activeStep].related_interaction} timestep_id={props.timesteps[activeStep].id}/>
+          <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} roles={props.role} story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh}/>
+          <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene} story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh}/>
+          <CreateRole open={createRoleDialogOpen} setOpen={setCreateRoleDialogOpen} story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh}/>
+          <CreateScene open={createSceneDialogOpen} setOpen={setCreateSceneDialogOpen} story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh}/>
+          <CreateTimestep open={createTimestepDialogOpen} setOpen={setCreateTimestepDialogOpen} roles={props.role} scenes={props.scene} story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh} />
+          
 
           <Box sx={{ '& > :not(style)': { m: 1 } }} >
             <Tooltip title="添加时间步">
@@ -125,7 +132,9 @@ const Story = (props: StoryProps) => {
               </Fab>
             </Tooltip>
             <Tooltip title="为当前时间步生成故事">
-              <Fab color="primary" aria-label="Generate" style={{ position: 'fixed', right: 100, bottom: 16 }}>
+              <Fab color="primary" aria-label="Generate" style={{ position: 'fixed', right: 100, bottom: 16 }}
+                onClick={() => { setGenerateDialogOpen(true); }}
+              >
                 <EditIcon />
               </Fab>
             </Tooltip>

@@ -2,32 +2,32 @@ import RoleAgent from "./RoleAgent";
 
 class Interaction {
   id: number; 
-  role: RoleAgent;
+  sender: RoleAgent;
   related_timestep_id: number;
   info: {
-    "movement": string[], 
-    "expression": string[], 
-    "speech": string[], 
-    "emotion": string[]
+    "BEHAVIOR": string[], 
+    "EXPRESSION": string[], 
+    "SPEECH": string[], 
+    "PSYCHOLOGICAL_ACTIVITY": string[]
   }
   constructor(
     id: number = 0,
-    role: RoleAgent = new RoleAgent(),
+    sender: RoleAgent = new RoleAgent(),
     related_timestep_id: number = 0,
     info: {
-      "movement": string[], 
-      "expression": string[], 
-      "speech": string[], 
-      "emotion": string[]
+      "BEHAVIOR": string[], 
+      "EXPRESSION": string[], 
+      "SPEECH": string[], 
+      "PSYCHOLOGICAL_ACTIVITY": string[]
     } = {
-      "movement": [], 
-      "expression": [], 
-      "speech": [], 
-      "emotion": []
+      "BEHAVIOR": [], 
+      "EXPRESSION": [], 
+      "SPEECH": [], 
+      "PSYCHOLOGICAL_ACTIVITY": []
     }
   ) {
     this.id = id;
-    this.role = role;
+    this.sender = sender;
     this.related_timestep_id = related_timestep_id;
     this.info = info;
   }

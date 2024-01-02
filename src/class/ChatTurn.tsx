@@ -1,12 +1,12 @@
 class ChatTurn {
-  type: "assistant" | "user";
-  description: string;
+  sender: "role" | "user";
+  message: string;
   constructor(
-    type: "assistant" | "user" = "assistant",
-    description: string = ""
+    sender: "role" | "user" = "user",
+    message: string = ""
   ) {
-    this.type = type;
-    this.description = description;
+    this.sender = sender;
+    this.message = message;
   }
 }
 

@@ -1,10 +1,13 @@
 import RoleAgent from "@/class/RoleAgent";
 import { request } from "@/utils/network";
 import { Button, FormControlLabel, Switch, TextField, Tooltip } from "@mui/material";
-import { Divider } from "antd";
-import { useState } from "react";
+import { Divider, Spin } from "antd";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface EditRoleProps {
+  refresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   story_id: number;
   mode: 'create' | 'update';
   info?: RoleAgent;
@@ -18,9 +21,10 @@ const EditRole = (props: EditRoleProps) => {
   const [preferences, setPreferences] = useState(props.info?props.info.preferences.join('\n'):"");
   const [otherInformation, setOtherInformation] = useState(props.info?props.info.otherInformation.join('\n'):"");
   const [needCompletion, setNeedCompletion] = useState(false);
-  const onSubmit = () => {
+  const [loading, setLoading] = useState(false);
+  const onSubmit = async () => {
     request(`/api/role/${props.mode}`, "POST", {
-      id: props.mode == "create" ? props.info?.id : undefined,
+      id: props.mode == "create" ? undefined : props.info?.id,
       name: name,
       age: age,
       characteristics: characteristics.split('\n'),
@@ -30,15 +34,20 @@ const EditRole = (props: EditRoleProps) => {
       need_completion: needCompletion
     })
       .then(() => {
-
+        props.setRefresh(!props.refresh);
+        if (props.mode == "create") {
+          props.setOpen(false);
+        }
       })
       .catch(() => {
 
       })
+      .finally(() => {setLoading(false);})
   }
 
   return (
     <>
+      <Spin spinning={loading}>
       <TextField label="角色名称" variant="outlined" defaultValue={name} onChange={(e) => { setName(e.target.value); }} />
       <Divider type="vertical" />
       <Tooltip title="你可以只指定部分内容，剩余信息由LLM补全">
@@ -53,7 +62,8 @@ const EditRole = (props: EditRoleProps) => {
       <br /><br />
       <TextField label="其他信息(可选，每行一条)" variant="outlined" fullWidth multiline defaultValue={otherInformation} onChange={(e) => { setOtherInformation(e.target.value); }} />
       <br /><br />
-      <Button fullWidth onClick={onSubmit}> 确认当前编辑 </Button>
+      <Button fullWidth onClick={() => {setLoading(true); onSubmit();}}> 确认当前编辑 </Button>
+      </Spin>
     </>
   )
 }

@@ -2,26 +2,30 @@ import Interaction from "@/class/Interaction";
 import RoleAgent from "@/class/RoleAgent";
 import { request } from "@/utils/network";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface EditInteractionProps {
+  story_id: number;
   roles: RoleAgent[];
   related_timestep_ids: number;
+  fresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
   mode: "create" | "update";
   info?: Interaction;
 }
 
 const EditInteraction = (props: EditInteractionProps) => {
 
-  const [movement, setMovement] = useState<string>(props.info?props.info.info['movement'].join('\n'):"");
-  const [expression, setExpression] = useState<string>(props.info?props.info.info['expression'].join('\n'):""); 
-  const [speech, setSpeech] = useState<string>(props.info?props.info.info['speech'].join('\n'):"");
-  const [emotion, setEmotion] = useState<string>(props.info?props.info.info['emotion'].join('\n'):"");
-  const [roleID, setRoleID] = useState(props.info?props.info.role.id:-1);
+  const [movement, setMovement] = useState<string>(props.info?props.info.info['BEHAVIOR'].join('\n'):"");
+  const [expression, setExpression] = useState<string>(props.info?props.info.info['EXPRESSION'].join('\n'):""); 
+  const [speech, setSpeech] = useState<string>(props.info?props.info.info['SPEECH'].join('\n'):"");
+  const [emotion, setEmotion] = useState<string>(props.info?props.info.info['PSYCHOLOGICAL_ACTIVITY'].join('\n'):"");
+  const [roleID, setRoleID] = useState(props.info?.sender.id);
 
   const onSubmit = () => {
     request(`/api/interaction/${props.mode}`, "POST", {
-      interaction_id: props.mode=="create"?props.info?.id:undefined,
+      story_id: props.story_id,
+      interaction_id: props.mode=="create"? undefined : props.info?.id,
       timestep_id: props.related_timestep_ids,
       sender_id: roleID,
       info: {
@@ -32,7 +36,7 @@ const EditInteraction = (props: EditInteractionProps) => {
       }
     })
     .then(() => {
-
+      props.setRefresh(!props.fresh);
     })
     .catch(() => {
 

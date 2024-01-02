@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, Grid, List, ListItem, ListItemAvatar, ListItemButton } from "@mui/material";
 import RoleInfo from "./RoleInfo";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Timestep from "@/class/Timestep";
 import SceneInfo from "./SceneInfo";
 import CreateInteraction from "./CreateInteraction";
@@ -16,7 +16,9 @@ import EditInteraction from "./EditInteraction";
 interface TimestepInfoProps {
   story_id: number;
   index: number;
-  info: Timestep
+  info: Timestep;
+  refresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
 }
 
 const TimestepInfo = (props: TimestepInfoProps) => {
@@ -58,7 +60,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
                     关联角色:
                   </Typography>
                   <List dense>
-                    {props.info.related_role.map((role, idx) => (
+                    {props.info.related_roles.map((role, idx) => (
                       <ListItem
                         key={idx}
                         secondaryAction={
@@ -87,7 +89,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
                     初始交互:
                   </Typography>
                   <br/>
-                  <EditInteraction key={props.info.id} roles={props.info.related_role} related_timestep_ids={props.info.id} mode={info.related_interaction.length ? "update" : "create" } info={info.related_interaction.length ? info.related_interaction[0] : undefined}/>
+                  <EditInteraction key={props.info.id} roles={props.info.related_roles} related_timestep_ids={props.info.id} mode={info.interactions.length ? "update" : "create"} info={info.interactions.length ? info.interactions[0] : undefined} story_id={props.story_id} fresh={props.refresh} setRefresh={props.setRefresh}/>
                   <br/>
                   {/* <Button style={{ width: "100%" }} onClick={() => {setCreateInterrInfoOpen(true)}}> 创建新交互 </Button> */}
                 </CardContent>
@@ -96,10 +98,10 @@ const TimestepInfo = (props: TimestepInfoProps) => {
           </Grid>
         </CardContent>
       </Card>
-      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen} related_timestep_id={info.id} roles={info.related_role}/>
-      <InteractionInfo open={interactionInfoOpen} setOpen={setInterrInfoOpen} info={info.related_interaction[selectedInteractionIdx]} roles={info.related_role}/>
-      <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_role[selectedRoleIdx]} story_id={props.story_id} />
-      <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} story_id={props.story_id} />
+      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen} related_timestep_id={info.id} roles={info.related_roles}/>
+      <InteractionInfo open={interactionInfoOpen} setOpen={setInterrInfoOpen} info={info.interactions[selectedInteractionIdx]} roles={info.related_roles} story_id={props.story_id} fresh={props.refresh} setRefresh={props.setRefresh}/>
+      <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_roles[selectedRoleIdx]} story_id={props.story_id} refresh={props.refresh} setRefresh={props.setRefresh} />
+      <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} story_id={props.story_id} refresh={props.refresh} setRefresh={props.setRefresh} />
     </>
   )
 };

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 const network = axios.create({
   baseURL: "",
+  timeout: 1000000000000,
 });
 
 export class NetworkError extends Error {

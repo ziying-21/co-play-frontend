@@ -6,6 +6,9 @@ import RoleAgent from "@/class/RoleAgent";
 import SceneAgent from "@/class/SceneAgent";
 
 interface CreateTimeProps {
+  refresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
+  story_id: number;
   roles: RoleAgent[];
   scenes: SceneAgent[];
   open: boolean;
@@ -21,7 +24,7 @@ const CreateTimestep = (props: CreateTimeProps) => {
       <Typography gutterBottom>
         正在创建时间步，请按照下面的指引完成设定，然后可以进行故事创作
       </Typography>
-      <EditTimestep mode="create" roles={props.roles} scenes={props.scenes}/>
+      <EditTimestep mode="create" roles={props.roles} scenes={props.scenes} story_id={props.story_id} setOpen={props.setOpen} refresh={props.refresh} setRefresh={props.setRefresh}/>
     </MyDialog>
   )
 };

@@ -7,6 +7,8 @@ import { ColorList } from '@/utils/utils';
 import EditRole from './EditRole';
 
 interface RoleListProps {
+  refresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   roles: RoleAgent[];
@@ -30,7 +32,7 @@ const RoleList = (props: RoleListProps) => {
   return (
     <MyDialog open={props.open} setOpen={props.setOpen} title={'角色列表 - 查看角色并编辑'} onOK={onOK} onClose={onClose} okText={singleRoleMode?"回到角色列表":"确定"}>
       {singleRoleMode ?
-        <EditRole mode='update' info={props.roles[selectedRoleIdx]} story_id={props.story_id} /> :
+        <EditRole mode='update' info={props.roles[selectedRoleIdx]} story_id={props.story_id} refresh={props.refresh} setRefresh={props.setRefresh} setOpen={props.setOpen} /> :
         <List dense>
           {props.roles.map((role, idx) => (
             <ListItem

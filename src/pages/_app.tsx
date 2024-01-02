@@ -21,7 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const [storyList, setStoryList] = useState<{id: number, title:string}[]>([])
   const [loading, setLoading] = useState(true);
-  
+  const [refresh, setRefresh] = useState(false);
+  const { id } = router.query;
+
   useEffect(() => {
     request("/api/story", "GET")
       .then((response) => {
@@ -32,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         // message.error("获取故事列表失败，请稍后重试")
       })
       .finally(() => {setLoading(false);})
-  }, [])
+  }, [refresh])
 
   return (
     <>
@@ -53,18 +55,19 @@ export default function App({ Component, pageProps }: AppProps) {
           [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
         }}
       >
+        {/* ['故事示例1', '故事示例2', '故事示例3', '故事示例4', '故事示例5', '故事示例6', '故事示例7', '故事示例8', '故事示例9', '故事示例10', '故事示例11', '故事示例12', '故事示例13', '故事示例14', '故事示例15' ] */}
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
-            {['故事示例1', '故事示例2', '故事示例3', '故事示例4', '故事示例5', '故事示例6', '故事示例7', '故事示例8', '故事示例9', '故事示例10', '故事示例11', '故事示例12', '故事示例13', '故事示例14', '故事示例15' ].map((text, index) => (
-              <ListItem key={text} disablePadding>
+            {storyList.map((story, index) => (
+              <ListItem key={index} disablePadding>
                 <ListItemButton onClick={() => {
-                  router.push(`/${index}`);
+                  router.push(`/${story.id}`);
                 }}>
                   <ListItemIcon>
                     <ArticleOutlinedIcon/>
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={story.title} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -73,7 +76,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto" }}>
         <Toolbar />
-        <Component {...pageProps} />
+        <Component {...pageProps} refresh={refresh} setRefresh={setRefresh}/>
       </Box>
     </Box>
     </>

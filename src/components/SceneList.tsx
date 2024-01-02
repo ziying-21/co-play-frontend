@@ -6,6 +6,8 @@ import { ColorList } from '@/utils/utils';
 import EditScene from './EditScene';
 
 interface SceneListProps {
+  refresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
   story_id: number;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -29,7 +31,7 @@ const SceneList = (props: SceneListProps) => {
   return (
     <MyDialog open={props.open} setOpen={props.setOpen} onClose={onClose} title={singleSceneMode? props.scenes[selectedSceneIdx].place : '场景列表 - 查看场景并编辑'} onOK={onOK} okText={singleSceneMode?"回到场景列表":"确定"}>
       {singleSceneMode ?
-        <EditScene mode='update' info={props.scenes[selectedSceneIdx]} story_id={props.story_id} /> :
+        <EditScene mode='update' info={props.scenes[selectedSceneIdx]} story_id={props.story_id} refresh={props.refresh} setRefresh={props.setRefresh} /> :
         <List dense>
           {props.scenes.map((scene, idx) => (
             <ListItem
