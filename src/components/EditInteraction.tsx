@@ -25,7 +25,7 @@ const EditInteraction = (props: EditInteractionProps) => {
   const onSubmit = () => {
     request(`/api/interaction/${props.mode}`, "POST", {
       story_id: props.story_id,
-      interaction_id: props.mode=="create"? undefined : props.info?.id,
+      interaction_id: props.mode=="create"? undefined : props.info?.interaction_id,
       timestep_id: props.related_timestep_ids,
       sender_id: roleID,
       info: {

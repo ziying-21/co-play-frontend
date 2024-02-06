@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 const network = axios.create({
-  baseURL: "",
-  timeout: 1000000000000,
+  baseURL: ""
 });
 
 export class NetworkError extends Error {
@@ -18,10 +17,14 @@ export const request = async (
   method: "GET" | "POST" | "PUT" | "DELETE",
   data?: any
 ) => {
-  const response = await network.request({ method, url, data }).catch((err) => {
+  const response = await network.request({
+     method, url, data,  
+     timeout: 1000000,
+    }).catch((err) => {
     /**
      * @note token expired 表明token已过期，需要跳转到登录界面
      */
+    console.log(err);
     throw new NetworkError(err.response);
   });
   if (response?.data.code === 0) {

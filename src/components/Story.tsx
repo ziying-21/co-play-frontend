@@ -23,6 +23,7 @@ import CreateScene from "./CreateScene";
 import CreateTimestep from "./CreateTimestep";
 import AutoInteraction from "./AutoInteraction";
 import Generate from "./Generate";
+import { Result } from "antd";
 
 interface StoryProps {
   id: any;
@@ -99,8 +100,8 @@ const Story = (props: StoryProps) => {
                 <AutoInteraction open={autoInteractionDialogOpen} setOpen={setAutoInteractionDialogOpen} role={props.timesteps[activeStep].related_roles} interactions={props.timesteps[activeStep].interactions} timestep_id={props.timesteps[activeStep].id} story_id={props.id} fresh={props.refresh} setRefresh={props.setRefresh}/>
                 <Generate refresh={props.refresh} setRefresh={props.setRefresh} story_id={props.id} open={generateDialogOpen} setOpen={setGenerateDialogOpen} timestep_id={props.timesteps[activeStep].id}/>
               </>
-              // : <Result status="404" title="当前故事时间步为空" subTitle="请先创建时间步" />
-              :<>当前故事时间步为空</>
+              : <Result status="404" title="当前故事时间步为空" subTitle="请先创建时间步" />
+              // :<>当前故事时间步为空</>
           }
           <RoleList open={roleDialogOpen} setOpen={setRoleDialogOpen} roles={props.role} story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh}/>
           <SceneList open={sceneDialogOpen} setOpen={setSceneDialogOpen} scenes={props.scene} story_id={props.id} refresh={props.refresh} setRefresh={props.setRefresh}/>

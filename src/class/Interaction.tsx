@@ -1,7 +1,7 @@
 import RoleAgent from "./RoleAgent";
 
 class Interaction {
-  id: number; 
+  interaction_id: number; 
   sender: RoleAgent;
   related_timestep_id: number;
   info: {
@@ -11,7 +11,7 @@ class Interaction {
     "PSYCHOLOGICAL_ACTIVITY": string[]
   }
   constructor(
-    id: number = 0,
+    interaction_id: number = 0,
     sender: RoleAgent = new RoleAgent(),
     related_timestep_id: number = 0,
     info: {
@@ -26,7 +26,7 @@ class Interaction {
       "PSYCHOLOGICAL_ACTIVITY": []
     }
   ) {
-    this.id = id;
+    this.interaction_id = interaction_id;
     this.sender = sender;
     this.related_timestep_id = related_timestep_id;
     this.info = info;

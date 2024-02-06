@@ -2,11 +2,11 @@ import { SetStateAction, Dispatch, useState } from "react";
 import MyDialog from "./MyDialog";
 import RoleAgent from "@/class/RoleAgent";
 import Interaction from "@/class/Interaction";
-import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemButton } from "@mui/material";
+import { Avatar, Button, List, ListItem, ListItemAvatar, ListItemButton, Typography } from "@mui/material";
 import { ColorList } from "@/utils/utils";
 import EditInteraction from "./EditInteraction";
 import { request } from "@/utils/network";
-import { Spin } from "antd";
+import { Divider, Spin } from "antd";
 
 interface AutoInteractionProps {
   story_id: number;
@@ -55,6 +55,21 @@ const AutoInteraction = (props: AutoInteractionProps) => {
       .finally(() => {setLoading(false);})
   }
 
+  const onDelete = async (id: number) => {
+    request("/api/interaction/delete", "POST", {
+      story_id: props.story_id,
+      timestep_id: props.timestep_id,
+      interaction_id: id
+    })
+      .then(() => {
+        props.setRefresh(!props.fresh);
+      })
+      .catch(() => {
+
+      })
+      .finally(() => {setLoading(false);})
+  }
+
   return (
     <MyDialog open={props.open} setOpen={props.setOpen} onOK={onOK} onClose={onClose} okText={isEditMode ? "返回交互列表" : "取消"} title={"自动交互"}>
       <>
@@ -69,15 +84,8 @@ const AutoInteraction = (props: AutoInteractionProps) => {
                     key={idx}
                     secondaryAction={
                       <Button onClick={() => {
-                        request("/api/interaction/delete", "POST", {
-                          "interaction_id": interaction.id
-                        })
-                          .then(() => {
-
-                          })
-                          .catch(() => {
-
-                          })
+                        setLoading(true)
+                        onDelete(interaction.interaction_id)
                       }}>
                         删除
                       </Button>
@@ -88,6 +96,15 @@ const AutoInteraction = (props: AutoInteractionProps) => {
                         <Avatar style={{ backgroundColor: ColorList[idx % ColorList.length] }} sizes='large'> {interaction.sender.name[0]} </Avatar>
                       </ListItemAvatar>
                       {interaction.sender.name}
+                      <Divider type="vertical"/>
+                      <Typography variant="caption">
+                        {
+                          interaction.info.SPEECH[0] && interaction.info.SPEECH[0]!="" ? interaction.info.SPEECH : 
+                          interaction.info.EXPRESSION[0] && interaction.info.EXPRESSION[0]!="" ? interaction.info.EXPRESSION :
+                          interaction.info.BEHAVIOR[0] && interaction.info.BEHAVIOR[0]!="" ? interaction.info.BEHAVIOR :
+                          interaction.info.PSYCHOLOGICAL_ACTIVITY[0] && interaction.info.PSYCHOLOGICAL_ACTIVITY[0]!="" ? interaction.info.PSYCHOLOGICAL_ACTIVITY : "无活动"
+                        }
+                      </Typography>
                     </ListItemButton>
                   </ListItem>
                 )

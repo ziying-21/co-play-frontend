@@ -98,7 +98,7 @@ const TimestepInfo = (props: TimestepInfoProps) => {
           </Grid>
         </CardContent>
       </Card>
-      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen} related_timestep_id={info.id} roles={info.related_roles}/>
+      <CreateInteraction open={createInteractionInfoOpen} setOpen={setCreateInterrInfoOpen} related_timestep_id={info.id} roles={info.related_roles} refresh={props.refresh} setRefresh={props.setRefresh}/>
       <InteractionInfo open={interactionInfoOpen} setOpen={setInterrInfoOpen} info={info.interactions[selectedInteractionIdx]} roles={info.related_roles} story_id={props.story_id} fresh={props.refresh} setRefresh={props.setRefresh}/>
       <RoleInfo open={roleInfoOpen} setOpen={setRoleInfoOpen} info={info.related_roles[selectedRoleIdx]} story_id={props.story_id} refresh={props.refresh} setRefresh={props.setRefresh} />
       <SceneInfo open={sceneInfoOpen} setOpen={setSceneInfoOpen} info={info.related_scene} story_id={props.story_id} refresh={props.refresh} setRefresh={props.setRefresh} />

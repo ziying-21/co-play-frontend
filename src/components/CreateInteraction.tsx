@@ -5,10 +5,13 @@ import EditInteraction from "./EditInteraction";
 import RoleAgent from "@/class/RoleAgent";
 
 interface CreateInteractionProps {
+  refresh: boolean;
+  setRefresh: Dispatch<SetStateAction<boolean>>;
   roles: RoleAgent[];
   related_timestep_id: number;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+
 }
 
 
@@ -22,7 +25,7 @@ const CreateInteraction = (props: CreateInteractionProps) => {
             正在创建交互，请按照下面的指引完成交互设定，然后可以用该交互进行故事创作
           </Typography>
           <br/>
-          <EditInteraction mode={"create"} related_timestep_ids={props.related_timestep_id} roles={props.roles}/>
+          <EditInteraction mode={"create"} related_timestep_ids={props.related_timestep_id} roles={props.roles} story_id={0} fresh={props.refresh} setRefresh={props.setRefresh}/>
         </MyDialog>
       )
 }

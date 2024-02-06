@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import MyDialog from "./MyDialog";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, LinearProgress, TextField, Typography } from "@mui/material";
 import { request } from "@/utils/network";
 // import { message } from "antd";
 import { useRouter } from "next/router";
@@ -18,10 +18,11 @@ const CreateStory = (props: CreateStoryProps) => {
   const [title, setTitle] = useState("");
   const [bigBackground, setBigBackground] = useState("");
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (props.createMode) {
       request("/api/story/create", "POST", {
         title: title,
@@ -35,6 +36,7 @@ const CreateStory = (props: CreateStoryProps) => {
         .catch(() => {
           // message.error("任务创建失败")
         })
+        .finally(() => {setLoading(false);})
     } else {
       request("/api/story/init", "POST", {
         info: content
@@ -47,6 +49,7 @@ const CreateStory = (props: CreateStoryProps) => {
         .catch(() => {
           // message.error("任务创建失败")
         })
+        .finally(() => {setLoading(false);})
     }
   }
 
@@ -76,7 +79,7 @@ const CreateStory = (props: CreateStoryProps) => {
             <TextField label="故事文本(必填)" multiline variant="outlined" fullWidth onChange={(e) => { setContent(e.target.value); }} />
           </>
       }
-      <Button fullWidth onClick={onSubmit}> 确认当前编辑 </Button>
+      <Button fullWidth onClick={ () => {setLoading(true); onSubmit();} }> 确认当前编辑 </Button>
     </MyDialog>
   )
 };
